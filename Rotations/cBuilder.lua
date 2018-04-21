@@ -117,11 +117,14 @@ function br.loader:new(spec,specName)
         if not self.power[k] then self.power[k] = {} end
         local power = self.power[k]
 
-        power.amount = function()
+        power.amount = function(type)
             if select(2,UnitClass("player")) == "DEATHKNIGHT" and v == 5 then
+                local runeTypes = {"blood","unholy","frost","death"}
                 local runeCount = 0
                 for i = 1, 6 do
-                    runeCount = runeCount + GetRuneCount(i)
+                    if type == nil or runeTypes[GetRuneType(i)] == type then
+                        runeCount = runeCount + GetRuneCount(i)
+                    end
                 end
                 return runeCount
             else
