@@ -1,14 +1,32 @@
 function getRacial()
-    local race = select(2,UnitRace("player"))
+
+    local race    = select(2,UnitRace("player"))
+    local class   = select(1,UnitClass('player'))
 
     if race == "BloodElf" then
-        BloodElfRacial = select(7, GetSpellInfo(GetSpellInfo(69179)))
+        -- BloodElfRacial = select(7, GetSpellInfo(GetSpellInfo(69179)))
+        if      class == "Mage" or class == "Hunter" == "Paladin" or class == "Priest" or class == "Warlock" then BloodElfRacial = 28730
+        elseif  class == "Death Knight" then BloodElfRacial = 50613
+        elseif  class == "Rogue" then BloodElfRacial = 25046
+        end
     end
     if race == "Draenei" then
-        DraeneiRacial = select(7, GetSpellInfo(GetSpellInfo(28880)))
+        -- DraeneiRacial = select(7, GetSpellInfo(GetSpellInfo(28880)))
+        if      class == "Priest"  then  DraeneiRacial = 59544
+        elseif  class == "Warrior" then  DraeneiRacial = 28880
+        elseif  class == "Mage"    then  DraeneiRacial = 59548
+        elseif  class == "Hunter"  then  DraeneiRacial = 59543
+        elseif  class == "Shaman"  then  DraeneiRacial = 59547
+        elseif  class == "Paladin" then  DraeneiRacial = 59545
+        elseif  class == "Death Knight" then DraeneiRacial = 59542
+        end
     end
     if race == "Orc" then
-        OrcRacial = select(7, GetSpellInfo(GetSpellInfo(20572)))
+        -- OrcRacial = select(7, GetSpellInfo(GetSpellInfo(20572)))
+        if      class == "Death Knight" or class == "Hunter" or class == "Rogue" or class == "Warrior" then  OrcRacial = 20572
+        elseif  class == "Warlock"  then  OrcRacial = 33702
+        elseif  class == "Shaman"   then  OrcRacial = 33697
+        end
     end
     local racialSpells = {
         -- Alliance
