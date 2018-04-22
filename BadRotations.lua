@@ -28,7 +28,7 @@ function br.debug:Print(message)
 end
 -- Run
 function br:Run()
-    br.className,_ = UnitClass("player")
+    _,br.className = UnitClass("player")
     local spec = ""
     -- if UnitLevel("player") >= 10 then
     --     _, spec = GetTalentTabInfo( GetPrimaryTalentTree(1,nil,nil), "player", nil, nil )
@@ -46,18 +46,16 @@ function br:Run()
 	br.read.commonReaders()
 	-- Globals
 	classColors = {
-        ["Warrior"]				= {class = "Warrior", 		B=0.43,	G=0.61,	R=0.78,	hex="c79c6e"},
-        ["Paladin"]				= {class = "Paladin", 		B=0.73,	G=0.55,	R=0.96,	hex="f58cba"},
-        ["Hunter"]				= {class = "Hunter",		B=0.45,	G=0.83,	R=0.67,	hex="abd473"},
-        ["Rogue"]				= {class = "Rogue",			B=0.41,	G=0.96,	R=1,	hex="fff569"},
-        ["Priest"]				= {class = "Priest",		B=1,	G=1,	R=1,	hex="ffffff"},
-        ["Deathknight"]			= {class = "Deathknight",	B=0.23,	G=0.12,	R=0.77,	hex="c41f3b"},
-        ["Shaman"]				= {class = "Shaman",		B=0.87,	G=0.44,	R=0,	hex="0070de"},
-        ["Mage"]				= {class = "Mage",			B=0.94,	G=0.8,	R=0.41,	hex="69ccf0"},
-        ["Warlock"]				= {class = "Warlock", 		B=0.79,	G=0.51,	R=0.58,	hex="9482c9"},
-        ["Monk"]			    = {class = "Monk",			B=0.59,	G=1,	R=0,	hex="00ff96"},
-        ["Druid"]			    = {class = "Druid", 		B=0.04,	G=0.49,	R=1,	hex="ff7d0a"},
-        ["Demonhunter"] 		= {class = "Demonhunter", 	B=0.79, G=0.19, R=0.64, hex="a330c9"},
+        ["WARRIOR"]				= {class = "Warrior", 		B=0.43,	G=0.61,	R=0.78,	hex="c79c6e"},
+        ["PALADIN"]				= {class = "Paladin", 		B=0.73,	G=0.55,	R=0.96,	hex="f58cba"},
+        ["HUNTER"]				= {class = "Hunter",		B=0.45,	G=0.83,	R=0.67,	hex="abd473"},
+        ["ROGUE"]				= {class = "Rogue",			B=0.41,	G=0.96,	R=1,	hex="fff569"},
+        ["PRIEST"]				= {class = "Priest",		B=1,	G=1,	R=1,	hex="ffffff"},
+        ["DEATHKNIGHT"]			= {class = "Deathknight",	B=0.23,	G=0.12,	R=0.77,	hex="c41f3b"},
+        ["SHAMAN"]				= {class = "Shaman",		B=0.87,	G=0.44,	R=0,	hex="0070de"},
+        ["MAGE"]				= {class = "Mage",			B=0.94,	G=0.8,	R=0.41,	hex="69ccf0"},
+        ["WARLOCK"]				= {class = "Warlock", 		B=0.79,	G=0.51,	R=0.58,	hex="9482c9"},
+        ["DRUID"]			    = {class = "Druid", 		B=0.04,	G=0.49,	R=1,	hex="ff7d0a"},
 		-- [1]				= {class = "Warrior", 		B=0.43,	G=0.61,	R=0.78,	hex="c79c6e"},
 		-- [2]				= {class = "Paladin", 		B=0.73,	G=0.55,	R=0.96,	hex="f58cba"},
 		-- [3]				= {class = "Hunter",		B=0.45,	G=0.83,	R=0.67,	hex="abd473"},
