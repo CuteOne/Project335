@@ -138,6 +138,18 @@ function getRuneCount(Type)
   	end
   	return runeCount
 end
+-- Get Count of Specific Inactive Rune Time
+function getInactiveRuneCount(Type)
+  local Type = string.lower(Type)
+  local runeCount = 0
+  local runeTable = runeTable
+  for i = 1, 6 do
+      if runeTable[i].Type == Type and runeTable[i].Cooldown ~= 0 then
+          runeCount = runeCount + runeTable[i].Count
+      end
+  end
+  return runeCount
+end
 -- Get Colldown Percent Remaining of Specific Runes
 function getRunePercent(Type)
   	Type = string.lower(Type)

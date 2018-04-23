@@ -125,6 +125,7 @@ Rotations\idList.lua
 
 ## DeathKnight ---------------------------------------------------
 
+Rotations\Death Knight\DKIN.lua
 
 ## Druid ---------------------------------------------------
 

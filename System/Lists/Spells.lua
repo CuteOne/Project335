@@ -63,14 +63,14 @@ br.lists.spells = {
                 bloodBoil                   = 49941,
                 bloodPresence               = 48266,
                 bloodStrike                 = 49930,
-                bloodTap                    = 56222,
+                bloodTap                    = 45529,
                 darkCommand                 = 56222,
                 deathPact                   = 48743,
                 pestilence                  = 50842,
                 strangulate                 = 47476,
               --Frost Spellbook
                 chainsOfIce                 = 45524,
-                empoweredRuneWeapon         = 47568,
+                empowerRuneWeapon           = 47568,
                 frostPresence               = 48263,
                 frostStrike                 = 55268,
                 hornOfWinter                = 57623,
@@ -78,10 +78,10 @@ br.lists.spells = {
                 iceboundFortitude           = 48792,
                 icyTouch                    = 49909,
                 mindFreeze                  = 47528,
-                obliterate                  = 47528,
+                obliterate                  = 51425,
                 pathOfFrost                 = 3714,
                 runeStrike                  = 56815,
-                unbreableArmor              = 51271,
+                unbreakableArmor            = 51271,
               --Unholy Spellbook
                 antiMagicShell              = 48707,
                 armyOfTheDead               = 42650,
@@ -98,6 +98,7 @@ br.lists.spells = {
 
             },
             buffs                           = {
+                bloodTap                    = 45529,
                 bloodPresence               = 48266,
                 frostPresence               = 48263,
                 unholyPresence              = 48265,

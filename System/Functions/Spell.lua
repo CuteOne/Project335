@@ -199,7 +199,8 @@ function getFullRechargeTime(spellID)
 end
 -- if getSpellCD(12345) <= 0.4 then
 function getSpellCD(SpellID)
-	if GetSpellCooldown(SpellID) == 0 then
+
+	if select(1,GetSpellCooldown(SpellID)) == 0 then
 		return 0
 	else
 		local Start ,CD = GetSpellCooldown(SpellID)
