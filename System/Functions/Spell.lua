@@ -245,7 +245,7 @@ end
 function isKnown(spellID)
 	if spellID == nil then return false end
 	local spellName = GetSpellInfo(spellID)
-	if spellName == nil then return false end 
+	if spellName == nil then return false end
 	-- if GetSpellBookItemInfo(tostring(spellName)) ~= nil then
 	-- 	return true
 	-- elseif IsPlayerSpell(tonumber(spellID)) == true then
@@ -256,5 +256,12 @@ function isKnown(spellID)
  --        return true
  --    end
 	-- return false
-	return GetSpellName(tostring(spellName)) ~= nil or IsPlayerSpell(tonumber(spellID)) or IsSpellKnown(spellID) or hasPerk(spellID)
+	return GetSpellName(tostring(spellName)) ~= nil or IsSpellKnown(spellID) or hasPerk(spellID)
+end
+function inRange(spellID,unit)
+	local inRange = IsSpellInRange(GetSpellInfo(spellID),unit)
+	if inRange == nil or inRange == 1 then
+		return true
+	end
+	return false 
 end

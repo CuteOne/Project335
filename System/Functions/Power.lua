@@ -221,22 +221,25 @@ function getRegen(Unit)
     return select(2,GetPowerRegen(Unit))
 end
 function getSpellCost(spell)
-	local t = GetSpellPowerCost(GetSpellInfo(spell))
-	if not t then
-		return 0
-	elseif not t[1]["minCost"] then
-		return 0
-	elseif not t[2] then
-		return t[1]["minCost"], t[1]["cost"], t[1]["type"]
-	elseif not t[2]["minCost"] then
-		return t[1]["minCost"], t[1]["cost"], t[1]["type"]
-	else
-		return t[1]["minCost"], t[1]["cost"], t[1]["type"], t[2]["minCost"], t[2]["cost"]
-	end
+	-- local t = GetSpellPowerCost(GetSpellInfo(spell))
+	-- if not t then
+	-- 	return 0
+	-- elseif not t[1]["minCost"] then
+	-- 	return 0
+	-- elseif not t[2] then
+	-- 	return t[1]["minCost"], t[1]["cost"], t[1]["type"]
+	-- elseif not t[2]["minCost"] then
+	-- 	return t[1]["minCost"], t[1]["cost"], t[1]["type"]
+	-- else
+	-- 	return t[1]["minCost"], t[1]["cost"], t[1]["type"], t[2]["minCost"], t[2]["cost"]
+	-- end
+	local _, _, _, cost = GetSpellInfo(spell)
+	return cost
 end
 
 function hasResources(spell,offset)
-  local cost, _, costtype = SpellCost(spell)
+  -- local cost, _, costtype = SpellCost(spell)
+  local _, _, _, cost, _, costtype = GetSpellInfo(spell)
   offset = offset or 0
   if not cost then
     return false

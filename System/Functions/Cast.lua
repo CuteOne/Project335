@@ -540,16 +540,18 @@ function createCastFunction(thisUnit,debug,minUnits,effectRng,spellID,index)
             	" |r, Eff: |cffFFFF00"..effectRng.." |r, Min Units: |cffFFFF00"..minUnits)
         end
     end
+	-- Attempt to determine best unit for spell's range
+	if thisUnit == nil then
+		if debug == "norm" or debug == "dead" or debug == "rect" or debug == "cone" then
+			thisUnit = getSpellUnit(spellCast)
+		else
+			thisUnit = getSpellUnit(spellCast,true)
+		end
+	end
     -- Base Spell Availablility Check
-    if --[[isChecked("Use: "..spellName) and ]]not select(2,IsUsableSpell(spellID)) and getSpellCD(spellID) == 0 and (isKnown(spellID) or debug == "known") then --and not isIncapacitated(spellID) then
-        -- Attempt to determine best unit for spell's range
-        if thisUnit == nil then
-        	if debug == "norm" or debug == "dead" or debug == "rect" or debug == "cone" then
-        		thisUnit = getSpellUnit(spellCast)
-        	else
-        		thisUnit = getSpellUnit(spellCast,true)
-        	end
-        end
+    if --[[isChecked("Use: "..spellName) and ]]not IsCurrentSpell(spellName) and not select(2,IsUsableSpell(spellID)) and getSpellCD(spellID) == 0
+		and (isKnown(spellID) or debug == "known") and hasResources(spellID) and inRange(spellID,thisUnit)--and not isIncapacitated(spellID)
+	then
         -- Return specified/best cast method
         if debug == "debug" then
             castDebug()
