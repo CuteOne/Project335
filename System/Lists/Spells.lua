@@ -410,9 +410,12 @@ br.lists.spells = {
                 prowl                       = 5215,
                 rejuvenation                = 48441,
                 regrowth                    = 48443,
+                savageRoar                  = 52610,
                 shadowmeld                  = 58984,
                 thorns                      = 467,
+                tigersFury                  = 50213,
                 travelForm                  = 783,
+                trauma                      = 46856,
             },
             debuffs                         = {
                 cyclone                     = 33786,
@@ -421,7 +424,10 @@ br.lists.spells = {
                 fairieFire                  = 770,
                 fairieFireFeral             = 16857,
                 growl                       = 6795,
+                mangleCat                   = 48566,
                 moonfire                    = 8921,
+                rake                        = 48574,
+                rip                         = 49800,
             },
             glyphs                          = {
 

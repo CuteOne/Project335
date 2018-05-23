@@ -183,7 +183,7 @@ local function runRotation()
 		local castable          							= br.player.cast.debug
         local clearcast                                     = br.player.buff.clearcasting.exists()
         local combatTime                                    = getCombatTime()
-        local combo                                         = br.player.power.comboPoints.amount()
+        local comboPoints                                   = br.player.power.comboPoints.amount()
         local comboDeficit                                  = br.player.power.comboPoints.deficit()
         local cd                                            = br.player.cd
         local charges                                       = br.player.charges
@@ -389,7 +389,7 @@ local function runRotation()
         end -- End Action List - Opener
     -- Action List - Bear
         local function actionList_Bear()
-            if cast.able.bearForm and not buff.bearForm.exists() then
+            if cast.able.bearForm() and not buff.bearForm.exists() then
                 if cast.bearForm() then return end
             end
             -- Enrage
@@ -403,8 +403,117 @@ local function runRotation()
         end
     -- Action List - Cat
         local function actionList_Cat()
-            if cast.able.catForm and not buff.catForm.exists() then
+            if cast.able.catForm() and not buff.catForm.exists() then
                 if cast.catForm() then return end
+            end
+
+            -- if ((((sr < lag) and (cp>0)) or (cp==5 and sr < srvsfb_time)) and (energy>=sr_energy or ooc > 0)) then
+            --     if cast.savageRoar() then return end
+    		-- elseif ((tf < lag) and (energy < 35) and (berserk < 165) and (cp<5 or rip<GCD+lag)) then
+    		-- 	if cast.tigersFury() then return end
+            -- elseif (ooc > 0) then
+            --     if (mangle < lag and trauma < lag and energy<(mangle_energy-10)) then
+            --         if cast.mangleCat() then return end
+    		-- 	else
+    		-- 		if cast.shred() then return end
+    		-- 	end
+    		-- elseif ((berserk < lag) and (energy >= 70) and (sr > GCD+lag) and (tf>=23) and (FeralbyNightdb.Berserk == true)) then
+            --     if cast.berserk() then return end
+    		-- elseif ((mangle < lag) and (trauma < lag) and (energy>=mangle_energy) and cp<5) then
+    		-- 	if cast.mangleCat() then return end
+    		-- elseif ((rake < lag) and cp<5 and (mangle >= lag or trauma >= lag)  and (energy>=rake_energy)
+            --     and ((mangle > ((rake_energy+mangle_energy-10-energy)/10) and cp<3) or cp>=3 or sr<(GCD+lag)))
+            -- then
+    		-- 	if cast.rake() then return end
+			-- elseif ((energy>=shred_energy) and cp<5 and (((tf<((shred_energy+rake_energy-10-energy)/10)
+            --     and ((mangle > ((shred_energy+mangle_energy-10-koj_m1-energy)/10) and rake > ((shred_energy+rake_energy-10-koj_m1-energy)/10)
+            --     and cp<3 and (mangle >= lag or trauma >= lag) and rake>(lag) ) or sr<(GCD+lag))) or (((mangle > ((shred_energy+mangle_energy-10-energy)/10)
+            --     and rake > ((shred_energy+rake_energy-10-energy)/10) and cp<3 and (mangle >= lag or trauma >= lag) and rake>(lag) ) or sr<(GCD+lag)))) or cp>=3))
+            -- then
+            -- elseif cast.able.shred() and energy >= getSpellCost(spell.shred) and comboPoints < 5
+            --     and ((( and debuff.rake.exists(units.dyn5)) or buff.savageRoar.remains() < gcdMax) or ((debuff.mangleCat.remain(units.dyn5) > ((getSpellCost(spell.shred)+getSpellCost(spell.mangleCat)-10-energy)/10)
+            --     and debuff.rake.remain(units.dyn5) > ((getSpellCost(spell.shred)+getSpellCost(spell.rake)-10-energy)/10) and comboPoints < 3
+            --     and (debuff.mangleCat.exists(units.dyn5) or debuff.trauma.exists(units.dyn5))
+            --     and debuff.rake.exists(units.dyn5)) or buff.savageRoar.remains() < gcdMax) or comboPoints >= 3) then
+	        --     if cast.shred() then return end
+	        -- -- elseif (((sr>lag) and (energy>=fb_energy or ooc > 0) and (cp==5) and (rip>lag)) and ((((rip>ripvsfb_time) or ((tf<ripvsfb_time) and (rip>ripvsfb_time_koj))) and ((sr>combovsfb_time) or ((tf<combovsfb_time) and (sr>combovsfb_time_koj)))) or (((sr>srvsfb_time) or ((tf<srvsfb_time) and (sr>srvsfb_time_koj))) and ((rip>combovsfb_time) or ((tf<combovsfb_time) and (rip>combovsfb_time_koj)))))) then
+            -- elseif cast.able.ferociousBite() and buff.savageRoar.exists() and (energy >= getSpellCost(spell.ferociousBite) or buff.clearcasting.exists())
+            --     and combo == 5 and debuff.rip.exists(units.dyn5) and debuff.rip.remain(units.dyn5) > 7 and buff.savageRoar.remain() > 4 then
+            --     if cast.ferociousBite() then return end
+		    -- --elseif ((sr>lag) and (energy>=rip_energy or ooc > 0) and (cp==5) and ((rip<lag))) then
+            -- elseif cast.able.rip() and buff.savageRoar.exists() and (energy >= getSpellCost(spell.rip) or buff.clearcasting.exists())
+            --     and comboPoints == 5 and not debuff.rip.exists(units.dyn5) then
+			--     if cast.rip() then return end
+		    -- -- elseif (energy >=(rake_energy+rip_energy-10) and cp==5) then
+            -- elseif energy >= getSpellCost(spell.rake) + getSpellCost(rip) - 10 and comboPoints == 5 then
+    		-- 	-- if (mangle < lag and trauma < lag) and (rip>=GCD) then
+            --     if cast.able.mangleCat() and not debuff.mangleCat.exists(units.dyn5) and not debuff.trauma.exists(units.dyn5) and debuff.rip.exists(units.dyn5) then
+    		-- 		if cast.mangleCat() then return end
+    		-- 	-- elseif (rake < lag) and (rip>=GCD)  then
+            --     elseif cast.able.rake() and debuff.rip.exists(units.dyn5) then
+    		-- 		if cast.rake() then return end
+    		-- 	end
+		    -- -- elseif((energy>=90) and (mangle>=GCD or trauma >=GCD) and (rake>=GCD) and (rip>=GCD) and cp==5) then
+            -- elseif cast.able.shred() and energy >= 90 and (debuff.mangleCat.exists(units.dyn5) or debuff.trauma.exists(units.dyn5))
+            --     and debuff.rake.exists(units.dyn5) and debuff.rip.exists(units.dyn5) and comboPoints == 5 then
+			--     if cast.shred() then return end
+		    -- --elseif ((FeralbyNightdb.FFF == true) and (fff < lag) and (fffdur < 7)) then
+            -- elseif cast.able.fairieFireFeral() and debuff.fairieFireFeral.remain(units.dyn5) < 7 then
+			--     if cast.fairieFireFeral() then return end
+		    -- end
+
+
+
+
+            -- actions+=/faerie_fire_feral,debuff_only=1
+            if cast.able.fairieFireFeral() and not debuff.fairieFireFeral.exists(units.dyn5) then
+                if cast.fairieFireFeral() then return end
+            end
+            -- actions+=/tigers_fury,if=energy<=30&!buff.berserk.up
+            -- actions+=/berserk_cat,if=energy>=80&energy<=90&!buff.tigers_fury.up
+            -- actions+=/savage_roar,if=buff.combo_points.stack>=1&buff.savage_roar.remains<=1
+            -- actions+=/rip,if=buff.combo_points.stack>=5&target.time_to_die>=6
+            if cast.able.rip() and comboPoints >= 5 and ttd(units.dyn5) >= 6 then
+                if cast.rip() then return end
+            end
+            -- actions+=/savage_roar,if=buff.combo_points.stack>=3&target.time_to_die>=9&buff.savage_roar.remains<=8&dot.rip.remains-buff.savage_roar.remains>=-3
+            -- actions+=/ferocious_bite,if=target.time_to_die<=6&buff.combo_points.stack>=5
+            -- actions+=/ferocious_bite,if=target.time_to_die<=1&buff.combo_points.stack>=4
+            -- actions+=/ferocious_bite,if=buff.combo_points.stack>=5&dot.rip.remains>=8&buff.savage_roar.remains>=11
+            -- actions+=/shred,extend_rip=1,if=dot.rip.remains<=4
+            -- actions+=/mangle_cat,mangle<=1
+            if cast.able.mangleCat() and debuff.mangleCat.remain() <= 1 then
+                if cast.mangleCat() then return end
+            end
+            -- actions+=/rake,if=target.time_to_die>=9
+            if cast.able.rake() and ttd(units.dyn5) >= 9 then
+                if cast.rake() then return end
+            end
+            -- actions+=/shred,if=(buff.combo_points.stack<=4|dot.rip.remains>=0.8)&dot.rake.remains>=0.4&(energy>=80|buff.omen_of_clarity.react|dot.rip.remains<=2|buff.berserk.up|cooldown.tigers_fury.remains<=3)
+            if (cast.able.shred() or cast.able.claw()) and (comboPoints <= 4 or debuff.rip.remain(units.dyn5) >= 0.8) and (debuff.rake.remain(units.dyn5) >= 0.4 or not isKnown(spell.rake))
+                and (energy >= 80 or buff.clearcasting.exists() or debuff.rip.remain(units.dyn5) <= 2 or cd.tigersFury.remain() <= 3)
+            then
+                if cast.able.shred() then
+                    if cast.shred() then return end
+                elseif cast.able.claw() then
+                    if cast.claw() then return end
+                end
+            end
+            -- actions+=/shred,if=target.time_to_die<=9
+            if (cast.able.shred() or cast.able.claw()) and ttd(units.dyn5) <= 9 then
+                if cast.able.shred() then
+                    if cast.shred() then return end
+                elseif cast.able.claw() then
+                    if cast.claw() then return end
+                end
+            end
+            -- actions+=/shred,if=buff.combo_points.stack<=0&buff.savage_roar.remains<=2
+            if (cast.able.shred() or cast.able.claw()) and comboPoints <= 0 and buff.savageRoar.remain() <= 2 then
+                if cast.able.shred() then
+                    if cast.shred() then return end
+                elseif cast.able.claw() then
+                    if cast.claw() then return end
+                end
             end
         end
     -- Action List - Caster
@@ -428,6 +537,9 @@ local function runRotation()
                 if isValidUnit("target") and opener == true and getDistance("target") < 30 then
                     if cast.able.wrath("target") and (mode.form == 3 or level < 10 or (level > 10 and not isKnown(spell.bearForm))) then
                         if cast.wrath("target") then return end
+                    end
+                    if cast.able.claw("target") and (mode.form == 1 and isKnown(spell.catForm)) then
+                        if cast.claw("target") then return end
                     end
                     if getDistance("target") < 5 then
                         StartAttack()

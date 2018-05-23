@@ -127,12 +127,19 @@ function br.loader:new(spec,specName)
                     end
                 end
                 return runeCount
+            elseif select(2,UnitClass("player")) == "DRUID" and v == 4 then
+                local thisUnit = dynamicTarget(5, true)
+                return GetComboPoints("player",thisUnit)
             else
                 return getPower("player",v)
             end
         end
         power.deficit = function()
-            return getPowerMax("player",v) - getPower("player",v)
+            if select(2,UnitClass("player")) == "DRUID" and v == 4 then
+                return 5 - getPower("player",v)
+            else
+                return getPowerMax("player",v) - getPower("player",v)
+            end
         end
         power.frac = function()
             if select(2,UnitClass("player")) == "DEATHKNIGHT" and v == 5 then
